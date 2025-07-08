@@ -6,13 +6,11 @@ import config from './src/assets/common/config';
 // https://vite.dev/config/
 export default defineConfig(async ({ mode }): Promise<UserConfig> => {
 	await config.init(mode);
-
+	let base = '/';
+	if (mode === 'production') base = '/project-animalcrossing/';
+	else if (mode === 'plugin') base = '/project-animalcrossing/dist/';
 	return {
-		base: config.isPlugin
-			? '/project-animalcrossing/dist/'
-			: config.isProduction
-				? '/project-animalcrossing/'
-				: './',
+		base,
 		esbuild: {
 			// Remove debugger statements in production
 			drop: mode === 'production' ? ['debugger'] : [],
