@@ -1,3 +1,10 @@
-### `npm start`
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Tooling
+React + TypeScript + Vite
+
+# Setup
+- ```npm install && npm run dev```
+
+# Deploy
+GitHub will auto deploy via GitHub actions whenever changes are pushed to `main` branch.
+
+[Live GitHub Pages](http://lone-do.github.io/project-zzz)
