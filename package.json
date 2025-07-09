@@ -1,16 +1,16 @@
 {
-	"name": "project-animalcrossing",
+	"name": "project-ac",
 	"description": "The Dynamic Animal Crossing Clock for your Phone/ Desktop",
 	"private": true,
 	"version": "2.1.0",
 	"type": "module",
-	"homepage": "http://lone-do.github.io/project-zzz",
+	"homepage": "https://lone-do.github.io/project-ac",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Lone-DO/animalcrossing.git"
+		"url": "git+https://github.com/Lone-DO/project-ac.git"
 	},
 	"bugs": {
-		"url": "https://github.com/Lone-DO/project-zzz/issues"
+		"url": "https://github.com/Lone-DO/project-ac/issues"
 	},
 	"keywords": [
 		"Animal",

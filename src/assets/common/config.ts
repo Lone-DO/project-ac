@@ -4,12 +4,12 @@ const config = {
 	baseUrl: '/',
 	isPlugin: false,
 	isProduction: false,
-	name: 'project-animalcrossing',
+	name: 'project-ac',
 	init(mode: string) {
 		this.mode = mode;
 		this.isPlugin = mode === 'plugin';
 		this.isProduction = mode === 'production';
-		this.baseUrl = mode === 'plugin' ? '/projects/animalcrossing' : '/';
+		this.baseUrl = mode === 'plugin' ? '/projects/ac' : '/';
 		return Promise.resolve(this.baseUrl);
 	},
 	sanitizeRoute(path: string) {

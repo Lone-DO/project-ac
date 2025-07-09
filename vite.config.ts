@@ -7,8 +7,8 @@ import config from './src/assets/common/config';
 export default defineConfig(async ({ mode }): Promise<UserConfig> => {
 	await config.init(mode);
 	let base = '/';
-	if (mode === 'production') base = '/project-animalcrossing/';
-	else if (mode === 'plugin') base = '/project-animalcrossing/dist/';
+	if (mode === 'production') base = `/${config.name}/`;
+	else if (mode === 'plugin') base = `/${config.name}/dist`;
 	return {
 		base,
 		esbuild: {
@@ -30,7 +30,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
 					'src/assets/common/config': './src/assets/common/config.ts',
 				},
 				output: {
-					name: 'project-animalcrossing',
+					name: config.name,
 					entryFileNames: (chunk) => `${[chunk.name]}.js`,
 				},
 			},
