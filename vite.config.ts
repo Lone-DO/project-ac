@@ -24,8 +24,13 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
 			minify: false,
 			sourcemap: true,
 			rollupOptions: {
+				input: {
+					app: './index.html',
+					'src/main': './src/main.tsx',
+					'assets/common/config': './src/assets/common/config.ts',
+				},
 				output: {
-					name: 'react-portfolio',
+					name: 'project-animalcrossing',
 					entryFileNames: (chunk) => `${[chunk.name]}.js`,
 				},
 			},
