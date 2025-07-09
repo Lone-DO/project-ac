@@ -27,7 +27,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
 				input: {
 					app: './index.html',
 					'src/main': './src/main.tsx',
-					'assets/common/config': './src/assets/common/config.ts',
+					'src/assets/common/config': './src/assets/common/config.ts',
 				},
 				output: {
 					name: 'project-animalcrossing',
