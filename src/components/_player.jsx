@@ -7,7 +7,7 @@ import winter from '@/assets/images/AC_App/weather-winter.svg';
 
 const Player = ({ props, state, loadSong, loadGeolocation, loadWeather, handleChange }) => {
 	const playerRef = useRef(null);
-	const audioSrc = useMemo(() => String(state.song).replace(/\/www/i, 'dl'), [state.song]);
+	const audioSrc = useMemo(() => String(state.song).replace(/\/www/i, '/dl'), [state.song]);
 	useEffect(() => {
 		if (audioSrc) playerRef?.current?.load();
 	}, [audioSrc]);
