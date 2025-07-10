@@ -1,4 +1,7 @@
-const audioData = {
+export interface iAudioData {
+	[key: string]: string | number | object;
+}
+const audioData: iAudioData = {
 	Alt: 'Complete OST collection that plays hourly while playing, Animal crossing. Only includes the 3 main games, excludes spinoff / Minigames',
 
 	Original: {

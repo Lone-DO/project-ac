@@ -5,6 +5,7 @@ const config = {
 	isPlugin: false,
 	isProduction: false,
 	name: 'project-ac',
+	weatherKey: 'c818f18fb44cfccea6436940f6cea5f8',
 	init(mode: string) {
 		this.mode = mode;
 		this.isPlugin = mode === 'plugin';

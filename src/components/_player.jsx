@@ -11,7 +11,7 @@ const Player = ({ props, state, loadSong, loadGeolocation, loadWeather, handleCh
 	useEffect(() => {
 		if (audioSrc) playerRef?.current?.load();
 	}, [audioSrc]);
-	if (state.hasStarted) {
+	if (state.isReady) {
 		let time = props.time.hours + '00';
 		if (props.time.period === 'PM' && new Date().getHours() > 12) {
 			time = parseInt(props.time.hours) + 12 + '00';
@@ -27,7 +27,7 @@ const Player = ({ props, state, loadSong, loadGeolocation, loadWeather, handleCh
 				</div>
 			</div>,
 			<h4 key='Song Title'>
-				{state.setAlbum}, {state.title}, {state.weather}
+				{state.album}, {state.title}, {state.weather}
 				{state.location}
 			</h4>,
 			<audio ref={playerRef} controls loop autoPlay id='player' key='player-audio' className='btn'>
@@ -47,21 +47,21 @@ const Player = ({ props, state, loadSong, loadGeolocation, loadWeather, handleCh
 			</div>,
 			<div key='controls'>
 				<img
-					onClick={() => loadSong(state.setAlbum, 'Raining')}
+					onClick={() => loadSong(state.album, 'Raining')}
 					className='btn weatherIcon'
 					alt='Change Weather to Rain Theme'
 					src={raining}
 				/>
 
 				<img
-					onClick={() => loadSong(state.setAlbum, 'Winter')}
+					onClick={() => loadSong(state.album, 'Winter')}
 					className='btn weatherIcon'
 					alt='Change Weather to Winter Theme'
 					src={winter}
 				/>
 
 				<img
-					onClick={() => loadSong(state.setAlbum, 'Normal')}
+					onClick={() => loadSong(state.album, 'Normal')}
 					className='btn weatherIcon'
 					alt='Change Weather to Normal Theme'
 					src={sunny}
