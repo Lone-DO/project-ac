@@ -4,7 +4,7 @@ import Audio from './Audio';
 function Clock() {
 	const [isLoaded, setLoaded] = useState(false);
 	const [date, setDate] = useState(new Date());
-	const prepend = (value) => (value = value < 10 ? `0${value}` : value);
+	const prepend = (value) => (value < 10 ? `0${value}` : value);
 
 	const period = useMemo(() => (date.getHours() < 12 ? 'AM' : 'PM'), [date]);
 	const hours = useMemo(
@@ -16,7 +16,11 @@ function Clock() {
 	);
 	const minutes = useMemo(() => prepend(date.getMinutes().toString()), [date]);
 	const seconds = useMemo(() => prepend(date.getSeconds().toString()), [date]);
-
+	const imgSource = useMemo(() => {
+		let value = hours + '00';
+		if (period === 'PM' && new Date().getHours() > 12) value = parseInt(hours) + 12 + '00';
+		return `/images/AC_App/Timeline/(${value}).png`;
+	}, [hours]);
 	let interval;
 
 	function timer() {
@@ -29,6 +33,15 @@ function Clock() {
 	timer();
 	return (
 		<main>
+			{isLoaded && (
+				<div className='clock' key='time'>
+					<img src={imgSource} alt='Clock' />
+					<div className='clock_time'>
+						<i>{hours}</i>
+						<i>:{minutes}</i>
+					</div>
+				</div>
+			)}
 			<Audio key='musicPlayer' isLoaded={isLoaded} time={{ period, hours, minutes, seconds }} />
 		</main>
 	);
