@@ -1,48 +1,23 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import Audio from './Audio';
+import { useSelector } from 'react-redux';
 
 function Clock() {
-	const [isLoaded, setLoaded] = useState(false);
-	const [date, setDate] = useState(new Date());
-	const prepend = (value) => (value < 10 ? `0${value}` : value);
+	const timer = useSelector((state) => state.timer);
 
-	const period = useMemo(() => (date.getHours() < 12 ? 'AM' : 'PM'), [date]);
-	const hours = useMemo(
-		() =>
-			prepend(
-				date.getHours() > 12 ? (date.getHours() - 12).toString() : date.getHours().toString(),
-			),
-		[date],
-	);
-	const minutes = useMemo(() => prepend(date.getMinutes().toString()), [date]);
-	const seconds = useMemo(() => prepend(date.getSeconds().toString()), [date]);
-	const imgSource = useMemo(() => {
-		let value = hours + '00';
-		if (period === 'PM' && new Date().getHours() > 12) value = parseInt(hours) + 12 + '00';
-		return `/images/AC_App/Timeline/(${value}).png`;
-	}, [hours]);
-	let interval;
-
-	function timer() {
-		clearInterval(interval);
-		interval = setInterval(() => {
-			setDate(new Date());
-			if (!isLoaded) setLoaded(true);
-		}, 1000);
-	}
-	timer();
+	if (!timer.ready) return;
 	return (
 		<main>
-			{isLoaded && (
+			{timer.ready && (
 				<div className='clock' key='time'>
-					<img src={imgSource} alt='Clock' />
+					<img src={timer.imgSource} alt='Clock' />
 					<div className='clock_time'>
-						<i>{hours}</i>
-						<i>:{minutes}</i>
+						<i>{timer.hours}</i>
+						<i>:{timer.minutes}</i>
 					</div>
 				</div>
 			)}
-			<Audio key='musicPlayer' isLoaded={isLoaded} time={{ period, hours, minutes, seconds }} />
+			<Audio key='musicPlayer' />
 		</main>
 	);
 }

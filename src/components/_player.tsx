@@ -4,19 +4,19 @@ import Search from './WeatherForm.tsx';
 import sunny from '@/assets/images/AC_App/weather-normal.svg';
 import raining from '@/assets/images/AC_App/weather-raining.svg';
 import winter from '@/assets/images/AC_App/weather-winter.svg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from '@/app/store.ts';
 
 export interface iPlayerProps {
 	song: string;
 	isReady: boolean;
 	album: string | null;
-	title: string;
-	weather: string | null;
-	location: string | null;
 	loadSong: (playlist?: string | null, theme?: string | null) => void;
 }
 
 const Player = (props: iPlayerProps) => {
+	const geolocator = useSelector((state: RootState) => state.geolocator);
+	const timer = useSelector((state: RootState) => state.timer);
 	const dispatch = useDispatch();
 	const playerRef = useRef(null);
 	const audioSrc = useMemo(() => String(props.song).replace(/\/www/i, '/dl'), [props.song]);
@@ -43,8 +43,8 @@ const Player = (props: iPlayerProps) => {
 	if (props.isReady) {
 		return [
 			<h4 key='Song Title'>
-				{props.album}, {props.title}, {props.weather}
-				{props.location ? `, ${props.location}` : ''}
+				{props.album}, {timer.prettyName}, {geolocator.weather}
+				{geolocator.location ? `, ${geolocator.location}` : ''}
 			</h4>,
 			<audio ref={playerRef} controls loop autoPlay id='player' key='player-audio' className='btn'>
 				<source src={audioSrc} type='audio/mp3' className='audioSource' />

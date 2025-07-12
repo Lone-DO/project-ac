@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import geolocatorReducer from '@/features/geolocator/geolocator';
-// import timer from '@/features/timer';
+import timerReducer from '@/features/timer/timer';
 
 export const store = configureStore({
 	reducer: {
-		// time,
+		timer: timerReducer,
 		geolocator: geolocatorReducer,
 	},
 });

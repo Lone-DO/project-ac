@@ -1,44 +1,31 @@
 import { useMemo, useState } from 'react';
 
-import { default as Player, type iPlayerProps } from './_player.tsx';
+import { default as Player } from './_player.tsx';
 import { default as audioData, type iAudioData } from '@/assets/common/audioData';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/app/store';
 
-function Audio(props: { time: { hours: string; period: string }; isLoaded: boolean }) {
+function Audio() {
 	const geolocator = useSelector((state: RootState) => state.geolocator);
+	const timer = useSelector((state: RootState) => state.timer);
 	/** State */
 	const dispatch = useDispatch();
 	const [isReady, setReady] = useState<boolean>(false);
 	const [album, setAlbum] = useState<string | null>(null);
 
-	const title = useMemo(() => {
-		const { hours, period } = props.time;
-		const title =
-			Number(hours) < 10 && hours.indexOf('0') > -1
-				? hours.replace('0', '') + period
-				: hours + period;
-		if (title === '12PM') return 'Noon';
-		else if (hours === '00') return 'Midnight';
-		return title;
-	}, [props.time]);
-
 	const song = useMemo(() => {
 		const chosenAlbum = (audioData[album || ''] || {}) as iAudioData;
 		const chosenTheme = (chosenAlbum[geolocator.weather || ''] || {}) as iAudioData;
-		return chosenTheme[title || ''] as string;
-	}, [title, album, geolocator.weather]);
+		return chosenTheme[timer.prettyName || ''] as string;
+	}, [album, geolocator.weather, timer.prettyName]);
 
 	const playerProps = useMemo(
 		() => ({
-			weather: geolocator.weather,
-			title,
 			album,
-			location: geolocator.location,
 			isReady,
 			song,
 		}),
-		[geolocator.weather, title, album, geolocator.location, isReady, song],
+		[album, isReady, song],
 	);
 
 	function loadSong(playlist?: string | null, theme?: string | null) {
@@ -56,18 +43,8 @@ function Audio(props: { time: { hours: string; period: string }; isLoaded: boole
 		}
 	}
 
-	function renderContent() {
-		switch (props.isLoaded) {
-			case null:
-				return;
-			case true:
-				return <Player {...playerProps} loadSong={loadSong} />;
-
-			default:
-				return 'Loading Audio...';
-		}
-	}
-	return renderContent();
+	if (timer.ready) return <Player {...playerProps} loadSong={loadSong} />;
+	return <span>Loading Audio...</span>;
 }
 
 export default Audio;
