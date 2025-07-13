@@ -12,14 +12,15 @@ import Footer from '@/components/_footer';
 import loadingGif from '@/assets/images/loading.gif';
 import { useDispatch } from 'react-redux';
 import { sync } from '@/features/timer/timerApi';
+import type { AppDispatch } from './store';
 
 function App() {
 	const isClosed = false;
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const [isLoaded, setLoaded] = useState(false);
 
 	const debounce = useRef<NodeJS.Timeout | string | number>('');
-	/** ClearTimeout on component closure */
+	/** TODO: ClearTimeout on component closure */
 	if (isClosed) {
 		clearTimeout(debounce.current);
 	}
@@ -38,6 +39,7 @@ function App() {
 			// 		.then((res) => res.json())
 			// 		.then((res) => this.setState({ videoData: res, isLoaded: true }));
 			setLoaded(true);
+			dispatch(sync());
 			startCycle();
 		}
 	}, [dispatch, isLoaded, startCycle]);
