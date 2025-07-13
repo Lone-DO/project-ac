@@ -5,20 +5,20 @@ import sunny from '@/assets/images/AC_App/weather-normal.svg';
 import raining from '@/assets/images/AC_App/weather-raining.svg';
 import winter from '@/assets/images/AC_App/weather-winter.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '@/app/store.ts';
+import type { AppDispatch, RootState } from '@/app/store.ts';
 
 export interface iPlayerProps {
 	song: string;
 	isReady: boolean;
 	album: string | null;
-	loadSong: (playlist?: string | null, theme?: string | null) => void;
+	loadSong: (opts?: { playlist?: string | null; theme?: string | null }) => void;
 }
 
 const Player = (props: iPlayerProps) => {
 	const geolocator = useSelector((state: RootState) => state.geolocator);
 	const timer = useSelector((state: RootState) => state.timer);
-	const dispatch = useDispatch();
-	const playerRef = useRef(null);
+	const dispatch = useDispatch<AppDispatch>();
+	const playerRef = useRef<HTMLAudioElement>(null);
 	const audioSrc = useMemo(() => String(props.song).replace(/\/www/i, '/dl'), [props.song]);
 	useEffect(() => {
 		if (audioSrc && playerRef) playerRef?.current?.load();
@@ -51,33 +51,42 @@ const Player = (props: iPlayerProps) => {
 				Your browser does not support the audio element.
 			</audio>,
 			<div key='songDials' className='timeline'>
-				<button className='btn timeline-item' onClick={() => props.loadSong('Original')}>
+				<button
+					className='btn timeline-item'
+					onClick={() => props.loadSong({ playlist: 'Original' })}
+				>
 					Original
 				</button>
-				<button className='btn timeline-item' onClick={() => props.loadSong('CityFolk')}>
+				<button
+					className='btn timeline-item'
+					onClick={() => props.loadSong({ playlist: 'CityFolk' })}
+				>
 					City Folk
 				</button>
-				<button className='btn timeline-item' onClick={() => props.loadSong('NewLeaf')}>
+				<button
+					className='btn timeline-item'
+					onClick={() => props.loadSong({ playlist: 'NewLeaf' })}
+				>
 					NewLeaf
 				</button>
 			</div>,
 			<div key='controls'>
 				<img
-					onClick={() => props.loadSong(props.album, 'Raining')}
+					onClick={() => props.loadSong({ theme: 'Raining' })}
 					className='btn weatherIcon'
 					alt='Change Weather to Rain Theme'
 					src={raining}
 				/>
 
 				<img
-					onClick={() => props.loadSong(props.album, 'Winter')}
+					onClick={() => props.loadSong({ theme: 'Winter' })}
 					className='btn weatherIcon'
 					alt='Change Weather to Winter Theme'
 					src={winter}
 				/>
 
 				<img
-					onClick={() => props.loadSong(props.album, 'Normal')}
+					onClick={() => props.loadSong({ theme: 'Normal' })}
 					className='btn weatherIcon'
 					alt='Change Weather to Normal Theme'
 					src={sunny}

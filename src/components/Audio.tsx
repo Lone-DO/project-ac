@@ -28,22 +28,24 @@ function Audio() {
 		[album, isReady, song],
 	);
 
-	function loadSong(playlist?: string | null, theme?: string | null) {
+	function loadSong(opts?: { playlist?: string | null; theme?: string | null }) {
 		try {
-			if (!isReady || !playlist || !theme) {
+			if (!isReady || (!opts?.playlist && !opts?.theme)) {
 				dispatch({ type: 'geolocator/setWeather', payload: 'Normal' });
 				setAlbum('Original');
 				setReady(true);
 			} else {
-				dispatch({ type: 'geolocator/setWeather', payload: theme });
-				setAlbum(playlist);
+				if (opts.theme) dispatch({ type: 'geolocator/setWeather', payload: opts.theme });
+				if (opts.playlist) setAlbum(opts.playlist);
 			}
 		} catch (err) {
 			alert(`Issue has occurred while loading Audio... > ${err}`);
 		}
 	}
 
-	if (timer.ready) return <Player {...playerProps} loadSong={loadSong} />;
+	if (timer.ready) {
+		return <Player {...playerProps} loadSong={loadSong} />;
+	}
 	return <span>Loading Audio...</span>;
 }
 
