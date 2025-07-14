@@ -1,5 +1,10 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { getWeather, type iWeatherData, type iWeatherItem } from './geolocatorApi';
+import {
+	getWeather,
+	type iWeatherData,
+	type iWeatherItem,
+	navigatorRejected,
+} from './geolocatorApi';
 
 export interface iGeoLocatorState {
 	error: string | null | Error;
@@ -7,6 +12,7 @@ export interface iGeoLocatorState {
 	weather: string | null;
 	location: string | null;
 	weatherData: iWeatherData | null;
+	currentWeather: iWeatherItem | null;
 	coordinates: { lon: number | null; lat: number | null };
 }
 
@@ -16,6 +22,7 @@ export const initialState: iGeoLocatorState = {
 	weather: null,
 	location: null,
 	weatherData: null,
+	currentWeather: null,
 	coordinates: { lon: null, lat: null },
 };
 
@@ -47,16 +54,14 @@ const geolocatorSlice = createSlice({
 			})
 			.addCase(getWeather.fulfilled, (state, action) => {
 				state.busy = false;
-				state.weatherData = action.payload as unknown as iWeatherData;
-				state.location = state.weatherData?.name as string;
-				const currentWeather = state.weatherData?.weather[0] || ({} as iWeatherItem);
-				if (['Rain', 'Drizzle', 'Thunderstorm'].includes(currentWeather?.main))
-					state.weather = 'Raining';
-				else if (currentWeather?.main === 'Snow') state.weather = 'Snowing';
-				else state.weather = 'Normal';
+				state.weather = action.payload.weather;
+				state.location = action.payload.location;
+				state.weatherData = action.payload.weatherData;
+				state.coordinates = action.payload.weatherData.coord;
+				state.currentWeather = action.payload.currentWeather;
 			})
-			.addCase('geolocator/setNavigator', (state) => {
-				console.log(state.coordinates);
+			.addCase(navigatorRejected.fulfilled, (state, action) => {
+				state.coordinates = action.payload;
 			});
 	},
 });

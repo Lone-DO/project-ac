@@ -1,4 +1,4 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { sync } from './timerApi';
 
 export const prepend = (str: string) => (str.length < 2 ? `0${str}` : str);
@@ -8,7 +8,6 @@ export interface iTimerState {
 	busy: boolean;
 	error: string | null | Error;
 	/** General */
-	date: string | Date | null;
 	/** computed */
 	hours: string | null;
 	period: string | null;
@@ -22,7 +21,6 @@ export const initialState: iTimerState = {
 	ready: false,
 	busy: false,
 	/** general */
-	date: null,
 	/** computed */
 	hours: null,
 	period: null,
@@ -41,7 +39,6 @@ const timerSlice = createSlice({
 			const hoursRaw = date.getHours();
 			const hoursAdjusted = String(hoursRaw - (hoursRaw > 12 ? 12 : 0));
 
-			state.date = date.toISOString();
 			state.period = hoursRaw < 12 ? 'AM' : 'PM';
 			state.minutes = prepend(date.getMinutes().toString());
 			state.hours = prepend(hoursAdjusted);
