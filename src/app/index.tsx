@@ -4,7 +4,7 @@ import '@/assets/styles/vendor/materialize/materialize.scss';
 import './index.scss';
 
 /** Components */
-import Landing from '@/components/Clock';
+import Landing from '@/components/Landing';
 import Header from '@/components/_header';
 import Footer from '@/components/_footer';
 // import audioData from '@/common/audioData';
