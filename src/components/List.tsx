@@ -1,12 +1,18 @@
-import React from 'react';
+import { type FormEvent, type JSX } from 'react';
 import audioData from '@/assets/common/audioData';
 
 const List = () => {
 	const { Original, NewLeaf, CityFolk } = audioData;
+	function submit(event: FormEvent) {
+		event.preventDefault();
+		const $el: Element | undefined = [...event.currentTarget.children].find(
+			({ localName }) => localName === 'select',
+		);
+		if ($el) window.open(($el as HTMLSelectElement)?.value);
+	}
 
-	const Display = (obj) => {
-		let body = [];
-		let children = [];
+	const Display = (obj: string | number | object) => {
+		const body: JSX.Element[] = [];
 		Object.keys(obj).map((playlist) => {
 			if (
 				playlist === 'Normal' ||
@@ -14,40 +20,34 @@ const List = () => {
 				playlist === 'Winter' ||
 				playlist === 'City'
 			) {
-				for (let song in obj[playlist]) {
-					let link = String(obj[playlist][song]).replace(/dl=0/i, 'dl=1');
-					children.push(
-						<option value={link} key={link}>
-							{song}
-						</option>,
-					);
-				}
-
 				body.push(
 					<div className='downloads_list' key={playlist}>
 						<h5>{playlist}</h5>
-						<form
-							onSubmit={(event) => {
-								event.preventDefault();
-								return window.open(event.target[0].value);
-							}}
-						>
-							<select name='Downloads'>{[...children]}</select>
+						<form onSubmit={submit}>
+							<select name='Downloads'>
+								{Object.keys(obj[playlist as keyof object]).map((song: string) => {
+									const link = String(obj[playlist as keyof object][song]).replace(/dl=0/i, 'dl=1');
+									return (
+										<option value={link} key={link}>
+											{song}
+										</option>
+									);
+								})}
+							</select>
 							<input type='submit' value='Download'></input>
 						</form>
 					</div>,
 				);
-				children = [];
 			}
 			return body;
 		});
 		return body;
 	};
-	// eslint-disable-next-line
+
 	const OriginalList = Display(Original);
-	// eslint-disable-next-line
+
 	const NewLeafList = Display(NewLeaf);
-	// eslint-disable-next-line
+
 	const CityFolkList = Display(CityFolk);
 	return (
 		<ol className='downloads'>

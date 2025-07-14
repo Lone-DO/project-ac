@@ -1,22 +1,28 @@
-import React, { Component } from 'react';
+import { Component, type JSX } from 'react';
 
 import Info from './Info';
 import List from './List';
 
+interface iState {
+	listShowing: boolean;
+	infoShowing: boolean;
+	display: JSX.Element[];
+}
+
 class Footer extends Component {
-	constructor() {
-		super();
+	constructor(props: object) {
+		super(props);
 		this.state = {
 			listShowing: false,
 			infoShowing: false,
 			display: [],
-		};
+		} as iState;
 
 		this.toggleDisplay = this.toggleDisplay.bind(this);
 	}
 
-	toggleDisplay(item, content = []) {
-		this.setState((prevState) => {
+	toggleDisplay(item: string, content: JSX.Element | null = null) {
+		this.setState((prevState: iState) => {
 			switch (item) {
 				case 'listShowing':
 					return {
@@ -37,7 +43,7 @@ class Footer extends Component {
 	}
 
 	render() {
-		const listBtn = this.state.listShowing ? (
+		const listBtn = (this.state as iState).listShowing ? (
 			<button
 				key='listHide'
 				onClick={() => this.toggleDisplay('listShowing')}
@@ -49,13 +55,13 @@ class Footer extends Component {
 			<button
 				key='listShow'
 				className='btn'
-				onClick={() => this.toggleDisplay('listShowing', <List audioData={this.props.audioData} />)}
+				onClick={() => this.toggleDisplay('listShowing', <List />)}
 			>
 				Downloads
 			</button>
 		);
 
-		const infoBtn = this.state.infoShowing ? (
+		const infoBtn = (this.state as iState).infoShowing ? (
 			<button
 				key='infoHide'
 				onClick={() => this.toggleDisplay('infoShowing')}
@@ -67,7 +73,7 @@ class Footer extends Component {
 			<button
 				key='infoShow'
 				className='btn'
-				onClick={() => this.toggleDisplay('infoShowing', <Info props={this.props.audioData} />)}
+				onClick={() => this.toggleDisplay('infoShowing', <Info />)}
 			>
 				Info
 			</button>
@@ -79,7 +85,7 @@ class Footer extends Component {
 					{infoBtn}
 					{listBtn}
 				</div>
-				{this.state.display}
+				{(this.state as iState).display}
 			</footer>
 		);
 	}
