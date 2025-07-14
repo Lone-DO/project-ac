@@ -1,5 +1,6 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { generateSong } from './radioApi';
+import type { RootState } from '@/app/store';
 
 export interface iRadioState {
 	error: string | null | Error;
@@ -36,5 +37,10 @@ const radioSlice = createSlice({
 		});
 	},
 });
+
+export const radioSelector = (state: RootState) => state.radio;
+export const useRadioStore = createSelector(radioSelector, (radio) => radio);
+
+export const { albumUpdated } = radioSlice.actions;
 
 export default radioSlice.reducer;

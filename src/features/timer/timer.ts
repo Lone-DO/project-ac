@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { sync } from './timerApi';
+import type { RootState } from '@/app/store';
 
 export const prepend = (str: string) => (str.length < 2 ? `0${str}` : str);
 
@@ -52,4 +53,9 @@ const timerSlice = createSlice({
 	},
 });
 
+export const timerSelector = (state: RootState) => state.timer;
+export const useTimerStore = createSelector(timerSelector, (timer) => {
+	const { ready, hours, period, minutes, imgSource } = timer;
+	return { ready, hours, period, minutes, imgSource };
+});
 export default timerSlice.reducer;

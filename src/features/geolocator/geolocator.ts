@@ -1,10 +1,11 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import {
 	getWeather,
 	type iWeatherData,
 	type iWeatherItem,
 	navigatorRejected,
 } from './geolocatorApi';
+import type { RootState } from '@/app/store';
 
 export interface iGeoLocatorState {
 	error: string | null | Error;
@@ -65,6 +66,9 @@ const geolocatorSlice = createSlice({
 			});
 	},
 });
+
+export const geolocatorSelector = (state: RootState) => state.geolocator;
+export const useGeoStore = createSelector(geolocatorSelector, (geo) => geo);
 
 export const { setBusy, setNavigator, setLocation, setWeather } = geolocatorSlice.actions;
 
