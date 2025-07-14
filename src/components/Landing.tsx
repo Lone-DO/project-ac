@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Player from './Player';
 import Clock from './Clock';
-import { radioSelector, type AppDispatch } from '@/app/store';
+import { type AppDispatch } from '@/app/store';
 import { load, type iLoadArg } from '@/features/radio/radioApi';
+import { radioSelector } from '@/features/radio/radio';
 
 export default function Landing() {
 	console.log('Landing');

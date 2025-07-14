@@ -5,8 +5,8 @@ import './index.scss';
 
 /** Components */
 import Landing from '@/components/Landing';
-import Header from '@/components/_header';
-import Footer from '@/components/_footer';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 // import audioData from '@/common/audioData';
 
 import loadingGif from '@/assets/images/loading.gif';

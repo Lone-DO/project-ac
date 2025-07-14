@@ -5,9 +5,12 @@ import sunny from '@/assets/images/AC_App/weather-normal.svg';
 import raining from '@/assets/images/AC_App/weather-raining.svg';
 import winter from '@/assets/images/AC_App/weather-winter.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { geolocatorSelector, radioSelector, timerSelector, type AppDispatch } from '@/app/store.ts';
+import { type AppDispatch } from '@/app/store.ts';
 import { getNavigator } from '@/features/geolocator/geolocatorApi.ts';
 import { load, type iLoadArg } from '@/features/radio/radioApi.ts';
+import { radioSelector } from '@/features/radio/radio.ts';
+import { timerSelector } from '@/features/timer/timer.ts';
+import { geolocatorSelector } from '@/features/geolocator/geolocator.ts';
 
 const Player = () => {
 	const dispatch = useDispatch<AppDispatch>();

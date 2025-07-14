@@ -1,5 +1,4 @@
-import React from 'react';
-import { useTimerStore } from '@/app/store';
+import { useTimerStore } from '@/features/timer/timer';
 import { useSelector } from 'react-redux';
 
 function Clock() {
@@ -8,7 +7,7 @@ function Clock() {
 	if (!timer.ready) return;
 	return (
 		<div className='clock' key='time'>
-			<img src={timer.imgSource} alt='Clock' />
+			<img src={timer.imgSource as string} alt='Clock' />
 			<div className='clock_time'>
 				<i>{timer.hours}</i>
 				<i>:{timer.minutes}</i>
