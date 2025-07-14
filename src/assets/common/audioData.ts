@@ -70,7 +70,7 @@ const audioData: iAudioData = {
 			'5AM':
 				'https://www.dropbox.com/scl/fi/zs8a9zuob437cr0us1dnd/080-5-AM-Cherry.mp3?rlkey=6td8po7m41d48al2wg6rl3wyg&st=c4rfrfzk&dl=0',
 			'6AM':
-				'https://www.dropbox.com/scl/fi/y6wam9x53n1lmdmyprj4u/082-7-AM-Cherry.mp3?rlkey=wgb4w9lz3dde00b4gadunr26o&st=rsijjou2&dl=0',
+				'https://www.dropbox.com/scl/fi/uchs00ubz5c5uk3oeggis/081-6-AM-Cherry.mp3?rlkey=8bddoerxdbre6w7w68ei9y7wr&st=si3994gz&dl=0',
 			'7AM':
 				'https://www.dropbox.com/scl/fi/y6wam9x53n1lmdmyprj4u/082-7-AM-Cherry.mp3?rlkey=wgb4w9lz3dde00b4gadunr26o&st=rsijjou2&dl=0',
 			'8AM':
@@ -177,13 +177,13 @@ const audioData: iAudioData = {
 			'7AM':
 				'https://www.dropbox.com/scl/fi/89ly87a5sc4m19iz9kosq/021-8-AM.mp3?rlkey=3d39uh4i9uhalnbll23gx0y0k&st=80sel9b6&dl=0',
 			'8AM':
-				'https://www.dropbox.com/scl/fi/0m9yl7stsjx8r51rvas6j/022-9-AM.mp3?rlkey=fyp03zlptp6uj490o9nt3m91x&st=pn2v3qp8&dl=0',
+				'https://www.dropbox.com/scl/fi/89ly87a5sc4m19iz9kosq/021-8-AM.mp3?rlkey=3d39uh4i9uhalnbll23gx0y0k&st=gd6y9obk&dl=0',
 			'9AM':
 				'https://www.dropbox.com/scl/fi/0m9yl7stsjx8r51rvas6j/022-9-AM.mp3?rlkey=fyp03zlptp6uj490o9nt3m91x&st=pn2v3qp8&dl=0',
 			'10AM':
 				'https://www.dropbox.com/scl/fi/v0wh3zv6jth9wuv0som31/023-10-AM.mp3?rlkey=8wgousugmqmdo017uivv5mbd8&st=zep9rl4g&dl=0',
 			'11AM':
-				'https://www.dropbox.com/scl/fi/szz2zw0hlhb2tfj3daeyd/025-12-AM.mp3?rlkey=63ytno74l9a9msrzkmrmegnmd&st=hbel57on&dl=0',
+				'https://www.dropbox.com/scl/fi/ntylx1bw299da0aw53bg0/024-11-AM.mp3?rlkey=gzy0ock3eubw1xh828j5suerm&st=srgohzu4&dl=0',
 			Noon: 'https://www.dropbox.com/scl/fi/szz2zw0hlhb2tfj3daeyd/025-12-AM.mp3?rlkey=63ytno74l9a9msrzkmrmegnmd&st=hbel57on&dl=0',
 			'1PM':
 				'https://www.dropbox.com/scl/fi/tl2ybh9vowcx6p6uha4af/026-1-PM.mp3?rlkey=o4zpwvnhskr8jvy5i20iumnqi&st=am27dc06&dl=0',
