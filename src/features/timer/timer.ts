@@ -43,7 +43,7 @@ const timerSlice = createSlice({
 			state.period = hoursRaw < 12 ? 'AM' : 'PM';
 			state.minutes = prepend(date.getMinutes().toString());
 			state.hours = prepend(hoursAdjusted);
-			state.imgSource = `/images/AC_App/Timeline/(${prepend(String(hoursRaw))}00).png`;
+			state.imgSource = `./images/AC_App/Timeline/(${prepend(String(hoursRaw))}00).png`;
 			let prettyName = `${hoursAdjusted}${state.period}`;
 			if (hoursRaw === 0) prettyName = 'Midnight';
 			else if (hoursRaw === 12) prettyName = 'Noon';
