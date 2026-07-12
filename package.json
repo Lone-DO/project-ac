@@ -2,7 +2,7 @@
 	"name": "project-ac",
 	"description": "The Dynamic Animal Crossing Clock for your Phone/ Desktop",
 	"private": true,
-	"version": "2.1.0",
+	"version": "2.2.0",
 	"type": "module",
 	"homepage": "https://lone-do.github.io/project-ac",
 	"repository": {
@@ -26,8 +26,9 @@
 		"dev": "vite",
 		"build": "tsc -b && vite build --mode development",
 		"release": "tsc -b && vite build",
+		"preview": "vite preview --mode development",
 		"lint": "eslint .",
-		"preview": "vite preview --mode development"
+		"lint:fix": "eslint . --fix",
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.12.0",
